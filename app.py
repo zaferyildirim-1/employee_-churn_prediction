@@ -40,4 +40,3 @@ if st.sidebar.button("Predict Churn"):
     st.subheader("Prediction Result")
     st.write(f"Churn Prediction: {'Left' if pred == 1 else 'Stayed'}")
     st.write(f"Churn Probability: {proba:.2%}")
-
