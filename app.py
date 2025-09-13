@@ -78,7 +78,3 @@ if st.sidebar.button("Predict Churn"):
         st.image("stayed.png", caption="Employee likely to stay", use_container_width=True)
 
 
-    st.subheader("Prediction Result")
-    st.success("Churn Prediction: **Left**" if pred == 1 else "Churn Prediction: **Stayed**")
-    if proba is not None:
-        st.write(f"Churn Probability: **{proba:.2%}**")
