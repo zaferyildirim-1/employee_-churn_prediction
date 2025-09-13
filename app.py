@@ -1,12 +1,11 @@
 import streamlit as st
 import joblib
-import numpy as np
+import pandas as pd
 
 # Load model
 model = joblib.load("saved_models/gb_best_pipe_final.joblib")
 
 st.title("Employee Churn Prediction App")
-
 st.sidebar.header("Input Employee Features")
 
 # Sidebar inputs
@@ -23,8 +22,6 @@ departments = st.sidebar.selectbox(
 )
 salary = st.sidebar.selectbox("Salary Level", ['low', 'medium', 'high'])
 
-# Prepare input as DataFrame for pipeline
-import pandas as pd
 input_df = pd.DataFrame([{
     "satisfaction_level": satisfaction_level,
     "last_evaluation": last_evaluation,
@@ -43,3 +40,4 @@ if st.sidebar.button("Predict Churn"):
     st.subheader("Prediction Result")
     st.write(f"Churn Prediction: {'Left' if pred == 1 else 'Stayed'}")
     st.write(f"Churn Probability: {proba:.2%}")
+
