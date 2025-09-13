@@ -62,10 +62,21 @@ if st.sidebar.button("Predict Churn"):
     pred = model.predict(input_df)[0]
     if hasattr(model, "predict_proba"):
         proba = model.predict_proba(input_df)[0][1]
-    elif hasattr(model, "decision_function"):
-        proba = 1 / (1 + np.exp(-model.decision_function(input_df)))[0]
     else:
         proba = None
+
+    st.subheader("Prediction Result")
+    if pred == 1:
+        st.success("Churn Prediction: **Left**")
+        if proba is not None:
+            st.write(f"Churn Probability: **{proba:.2%}**")
+        st.image("left.png", caption="Employee likely to leave", use_container_width=True)
+    else:
+        st.success("Churn Prediction: **Stayed**")
+        if proba is not None:
+            st.write(f"Churn Probability: **{proba:.2%}**")
+        st.image("stayed.png", caption="Employee likely to stay", use_container_width=True)
+
 
     st.subheader("Prediction Result")
     st.success("Churn Prediction: **Left**" if pred == 1 else "Churn Prediction: **Stayed**")
